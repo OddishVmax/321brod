@@ -28,7 +28,7 @@
     step_two_label: 'Begrenset antall',
     step_two_text: 'Vi baker et begrenset antall hver dag — sikre deg plass tidlig.',
     availability_prefix: 'Neste levering:',
-    availability_text: 'Lørdag 20. juni',
+    availability_text: 'Mandag 21. juni',
     footer_text: '3-2-1-Brød! — Etterstadkroken —',
   }
 
