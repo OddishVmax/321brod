@@ -1,0 +1,20 @@
+import { defineConfig } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+
+export default defineConfig({
+  plugins: [svelte()],
+  base: './',
+  publicDir: 'public',
+  build: {
+    outDir: 'docs',
+    assetsDir: '',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
+      }
+    }
+  }
+})
