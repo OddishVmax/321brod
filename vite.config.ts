@@ -7,13 +7,13 @@ export default defineConfig({
   publicDir: 'public',
   build: {
     outDir: 'docs',
-    assetsDir: '',
+    assetsDir: 'assets',
     sourcemap: false,
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]'
+        entryFileNames: 'assets/index.js',
+        chunkFileNames: 'assets/index.js',
+        assetFileNames: 'assets/[name][extname]'
       }
     }
   }

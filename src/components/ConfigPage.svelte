@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { parseCSV, type CSVData } from '../utils/csvParser'
+  import heroImage from '../../public/20260530_100653.jpeg'
 
   const CSV_URL = 'https://docs.google.com/spreadsheets/d/1hQverMxjTSJDdInHq9OTXKbam5LSwxebpVFNAbZqUMs/export?format=csv'
 
@@ -42,14 +43,6 @@
     return defaultConfig[matchKey] || ''
   }
 
-  function resolveStaticAssetPath(value: string): string {
-    if (!value) return ''
-    if (value.startsWith('/') || value.startsWith('http://') || value.startsWith('https://')) {
-      return value
-    }
-    return `/${value}`
-  }
-
   async function loadConfig() {
     try {
       loading = true
@@ -79,7 +72,7 @@
     titlePrefix: getConfigValue('title_prefix'),
     accent: getConfigValue('accent'),
     tagline: getConfigValue('tagline'),
-    heroImage: resolveStaticAssetPath(getConfigValue('hero_image')),
+    heroImage: heroImage,
     heroAlt: getConfigValue('hero_alt'),
     quantity: getConfigValue('quantity'),
     price: getConfigValue('price'),
