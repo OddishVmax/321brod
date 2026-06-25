@@ -28,7 +28,7 @@
     step_two_label: 'Begrenset antall',
     step_two_text: 'Vi baker et begrenset antall hver dag — sikre deg plass tidlig.',
     availability_prefix: 'Neste levering:',
-    availability_text: 'Mandag 21. juni',
+    availability_text: 'Fredag 26. juni',
     footer_text: '3-2-1-Brød! — Etterstadkroken —',
   }
 
@@ -41,6 +41,24 @@
       }
     }
     return defaultConfig[matchKey] || ''
+  }
+
+  function formatDeliveryDate(value: string): string {
+    if (!value) return ''
+
+    const trimmed = value.trim()
+    const parts = trimmed.split('.')
+    if (parts.length === 3) {
+      const day = Number(parts[0])
+      const month = Number(parts[1])
+      const year = Number(parts[2])
+      if (!Number.isNaN(day) && !Number.isNaN(month) && !Number.isNaN(year)) {
+        const monthNames = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
+        return `${day}. ${monthNames[month - 1]}`
+      }
+    }
+
+    return trimmed
   }
 
   async function loadConfig() {
@@ -86,7 +104,8 @@
     stepTwoLabel: getConfigValue('step_two_label'),
     stepTwoText: getConfigValue('step_two_text'),
     availabilityPrefix: getConfigValue('availability_prefix'),
-    availabilityText: getConfigValue('neste_dato') || getConfigValue('availability_text'),
+    availabilityText: formatDeliveryDate(getConfigValue('neste_dato') || getConfigValue('availability_text')),
+    isSoldOut: getConfigValue('utsolgt').toLowerCase() === 'true',
     footerText: getConfigValue('footer_text'),
   }
 </script>
@@ -126,7 +145,9 @@
         </svg>
         {config.delivery}
       </span>
-      <h2 class="soldout-text">{config.soldOut}</h2>
+      {#if config.isSoldOut}
+        <h2 class="soldout-text">UTSOLGT</h2>
+      {/if}
     </article>
 
     <article class="order-card">
